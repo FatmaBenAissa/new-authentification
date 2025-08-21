@@ -46,39 +46,41 @@ export const userSlice = createSlice({
       localStorage.removeItem("token");
     },
   },
-  extraReducers: {
-    [userRegister.pending]: (state) => {
-      state.status = "pending";
-    },
-    [userRegister.fulfilled]: (state, action) => {
-      state.status = "successsss";
+
+   extraReducers: (builder) => {
+    builder
+      .addCase(userRegister.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(userRegister.fulfilled, (state, action) => {
+        state.status = "successsss";
       state.user = action.payload.data.newUserToken;
       localStorage.setItem("token", action.payload.data.token);
-    },
-    [userRegister.rejected]: (state) => {
-      state.status = "fail";
-    },
-    [userlogin.pending]: (state) => {
-      state.status = "pending";
-    },
-    [userlogin.fulfilled]: (state, action) => {
-      state.status = "successsss";
+      })
+      .addCase(userRegister.rejected, (state) => {
+        state.status = "fail";
+      })
+         .addCase(userlogin.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(userlogin.fulfilled, (state, action) => {
+    state.status = "successsss";
       state.user = action.payload.data.user;
       localStorage.setItem("token", action.payload.data.token);
-    },
-    [userlogin.rejected]: (state) => {
-      state.status = "fail";
-    },
-    [userCurrent.pending]: (state) => {
-      state.status = "pending";
-    },
-    [userCurrent.fulfilled]: (state, action) => {
-      state.status = "successsss";
+      })
+      .addCase(userlogin.rejected, (state) => {
+        state.status = "fail";
+      })
+      .addCase(userCurrent.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(userCurrent.fulfilled, (state, action) => {
+     state.status = "successsss";
       state.user = action.payload?.data.user;
-    },
-    [userCurrent.rejected]: (state) => {
-      state.status = "fail";
-    },
+      })
+      .addCase(userCurrent.rejected, (state) => {
+        state.status = "fail";
+      })
   },
 });
 
